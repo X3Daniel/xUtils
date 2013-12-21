@@ -15,7 +15,9 @@
 
 package com.lidroid.xutils.util;
 
+import android.content.Context;
 import android.text.TextUtils;
+import android.util.DisplayMetrics;
 import org.apache.http.Header;
 import org.apache.http.HeaderElement;
 import org.apache.http.HttpResponse;
@@ -155,5 +157,16 @@ public class OtherUtils {
             LogUtils.e(e.getMessage(), e);
         }
         HttpsURLConnection.setDefaultHostnameVerifier(org.apache.http.conn.ssl.SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
+    }
+
+    public static int convertDpToPixel(Context context, float dp) {
+        DisplayMetrics metrics = context.getResources().getDisplayMetrics();
+        float px = dp * (metrics.densityDpi / 160f);
+        return (int) px;
+    }
+    public static int convertOffset(Context context, float dp) {
+        DisplayMetrics metrics = context.getResources().getDisplayMetrics();
+        float px = dp * (metrics.densityDpi / 160f);
+        return (int) (metrics.widthPixels-px);
     }
 }
